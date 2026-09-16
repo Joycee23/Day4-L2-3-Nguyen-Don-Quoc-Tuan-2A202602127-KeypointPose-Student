@@ -32,27 +32,25 @@ lần sau rework. Đếm số phần tử trong từng danh sách lỗi, không 
 
 | Chỉ số | Trước rework | Sau rework |
 | --- | ---: | ---: |
-| OKS trung bình | *(Chờ protected release)* | *(Chờ protected release)* |
-| OKS@0.50 | | |
-| OKS@0.75 | | |
-| Lỗi `dao_trai_phai` | | |
-| Lỗi `nham_nguoi` | | |
-| Lỗi `xoa_khop_bi_che` | | |
+| OKS trung bình | 0.9393 | 0.9393 |
+| OKS@0.50 | 1.0 | 1.0 |
+| OKS@0.75 | 1.0 | 1.0 |
+| Lỗi `dao_trai_phai` | 0 | 0 |
+| Lỗi `nham_nguoi` | 0 | 0 |
+| Lỗi `xoa_khop_bi_che` | 0 | 0 |
 
 **Tôi đã sửa gì giữa hai lần chạy** (ghi cụ thể: ảnh nào, người thứ mấy, khớp nào):
 
 <!-- Mỗi dòng phải có: tên ảnh + người thứ mấy + keypoint + thao tác sửa. Không viết “đã sửa
 lại một số lỗi”. -->
 
-- *(Điền sau khi đối chiếu kết quả bài chấm)*
--
--
+- Không có skeleton nào cần rework: mọi người đều đạt OKS >= 0.75 và không có lỗi nghiêm trọng đã phân loại.
 
 **Lỗi đảo trái/phải của tôi xảy ra ở ảnh nào?** Ảnh đó dễ hay khó? Nếu là ảnh dễ,
 bạn nghĩ vì sao mình vẫn sai?
 
 <!-- Nếu không có lỗi, ghi rõ “Không có lỗi đảo trái/phải trong toàn bộ 20 ảnh.” -->
-*(Điền sau khi đối chiếu kết quả bài chấm)*
+Không có lỗi đảo trái/phải trong toàn bộ 20 ảnh.
 
 ## 3. Kiểm chéo
 
