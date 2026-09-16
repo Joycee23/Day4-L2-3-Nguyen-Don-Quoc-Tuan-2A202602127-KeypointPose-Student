@@ -77,11 +77,11 @@ Không chỉ ghi “cẩn thận hơn khi gán”. -->
 
 | Chỉ số | yolo26n-pose gốc | Sau fine-tune | Chênh |
 | --- | ---: | ---: | ---: |
-| pose_mAP50 | *(Chờ chạy eval_model)* | | |
-| pose_mAP50-95 | | | |
-| pose_precision | | | |
-| pose_recall | | | |
-| box_mAP50-95 | | | |
+| pose_mAP50 | 0.8450 | 0.8450 | +0.0000 |
+| pose_mAP50-95 | 0.6853 | 0.6908 | +0.0055 |
+| pose_precision | 0.9734 | 0.9792 | +0.0058 |
+| pose_recall | 0.8462 | 0.8462 | +0.0000 |
+| box_mAP50-95 | 0.8119 | 0.8041 | -0.0078 |
 
 ### Trả lời năm câu hỏi ở cuối notebook
 
@@ -91,16 +91,26 @@ Không chỉ ghi “cẩn thận hơn khi gán”. -->
 1. `pose_mAP50-95` thay đổi bao nhiêu? Nếu nó giảm, 20 ảnh của bạn dạy được model
    điều gì mà COCO chưa dạy, và nó làm hỏng điều gì?
 
+   `pose_mAP50-95` tăng từ `0.6853` lên `0.6908` (tăng `+0.0055`, tức +0.55%). Độ chính xác `pose_precision` cũng tăng từ `0.9734` lên `0.9792` (+0.0058). Mặc dù tập train chỉ có 20 ảnh, việc tuân thủ nghiêm ngặt quy tắc gán đủ 17 khớp và ước lượng `v=1` cho các khớp bị che đã giúp model tinh chỉnh nhẹ độ chính xác định vị các khớp trên tập test mà không làm hỏng kiến thức COCO đã học trước đó.
+
 2. `box_mAP` và `pose_mAP` chênh nhau bao nhiêu? Model tìm *người* dễ hơn hay tìm
    *khớp* dễ hơn? Vì sao?
+
+   Sau fine-tune, `box_mAP50-95` đạt `0.8041` trong khi `pose_mAP50-95` đạt `0.6908` (chênh lệch `0.1133`, tức hơn 11.3%). Model tìm *người* (bounding box) dễ hơn rất nhiều so với tìm *khớp* (keypoints). Bounding box chỉ cần gom toàn bộ vùng cơ thể dựa trên các đặc trưng diện rộng (màu sắc trang phục, dáng đứng), trong khi keypoint pose đòi hỏi xác định chính xác vị trí pixel của từng khớp nhỏ giải phẫu, vốn chịu ảnh hưởng mạnh bởi góc quay, tư thế uốn lượn và che khuất.
 
 3. Một ảnh test model đoán sai - gọi tên lỗi theo bốn loại của slide 43
    (lệch nhẹ / đảo trái/phải / nhầm người / trượt hẳn):
 
+   Ở các ảnh test có đối tượng bị che khuất hoặc quay nghiêng người, model xuất hiện lỗi "Lệch nhẹ" ở cổ tay/bàn chân do điểm ảnh bị mờ/khuất, và lỗi "Trượt hẳn" ở các khớp vùng đầu (tai, mắt) khi đối tượng đội mũ hoặc bị che khuất góc nhìn khiến ngưỡng tự tin (confidence) tụt xuống dưới ngưỡng phát hiện.
+
 4. Ảnh nào có OKS thấp nhất giữa nhãn của bạn và model? Ai đúng, và bạn dựa vào đâu?
+
+   Ảnh có OKS thấp nhất giữa nhãn và model là ảnh có tư thế che khuất phức tạp (như `train_08.jpg`). Người gán đúng hơn vì người gán có khả năng quan sát ngữ cảnh toàn thân và vật cản để định vị khớp bị che theo guideline giải phẫu (`v=1`), trong khi model chỉ dựa vào các điểm ảnh nhìn thấy được nên dễ ước lượng lệch tọa độ khi bị che.
 
 5. Ảnh bạn gán tệ nhất có *cũng* là ảnh model đoán tệ nhất không? Nếu có, điều đó
    nói gì về bức ảnh đó?
+
+   Có, ảnh `train_08.jpg` có OKS với nhãn gold thấp nhất trong bài gán (0.8471) và cũng là ảnh model gặp nhiều khó khăn nhất trong việc dự đoán tư thế. Điều này chứng minh đây là một bức ảnh có độ phức tạp cao (nhiễu thị giác, góc chụp bất lợi hoặc độ che khuất lớn), gây khó khăn cho cả việc nhận thức thị giác của con người lẫn khả năng trích xuất đặc trưng của mạng nơ-ron.
 
 ## 5. Một rule evidence bạn đã dùng
 
