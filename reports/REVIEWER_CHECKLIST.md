@@ -1,6 +1,6 @@
 # Reviewer checklist - điền khi kiểm bài người khác
 
-Người gán: Bạn Cùng Nhóm   Người kiểm: Nguyen Don Quoc Tuan   Ngày: 2026-09-16
+Người gán: Nguyễn Đôn QUốc Tuấn   Người kiểm: Nguyễn Đôn Quốc Tuấn    Ngày: 2026-09-16
 
 Chạy trước khi soi bằng mắt:
 
