@@ -105,12 +105,12 @@ Không chỉ ghi “cẩn thận hơn khi gán”. -->
 
 4. Ảnh nào có OKS thấp nhất giữa nhãn của bạn và model? Ai đúng, và bạn dựa vào đâu?
 
-   Ảnh có OKS thấp nhất giữa nhãn và model là ảnh có tư thế che khuất phức tạp (như `train_08.jpg`). Người gán đúng hơn vì người gán có khả năng quan sát ngữ cảnh toàn thân và vật cản để định vị khớp bị che theo guideline giải phẫu (`v=1`), trong khi model chỉ dựa vào các điểm ảnh nhìn thấy được nên dễ ước lượng lệch tọa độ khi bị che.
+   Ảnh có OKS thấp nhất giữa nhãn của tôi và model là `train_13` với OKS chỉ đạt `0.495` (kế tiếp là `train_06` đạt `0.651`). Trong ca này, **nhãn của tôi đúng**. Căn cứ vào kết quả đối chiếu với nhãn Gold (`outputs/eval_vs_gold.json`), cả 3 người trong ảnh `train_13` đều đạt OKS rất cao với Gold (0.921, 0.912, 0.882). Model đạt OKS thấp ở `train_13` do bức ảnh này có 3 người đứng gần, chi thể chồng lấn làm model bị nhiễu và bắt nhầm khớp. Ngoài ra, model còn gặp hiện tượng phát hiện thừa người ở `train_10` (model đoán 2 / bạn 1) và `train_03` (model đoán 4 / bạn 2).
 
 5. Ảnh bạn gán tệ nhất có *cũng* là ảnh model đoán tệ nhất không? Nếu có, điều đó
    nói gì về bức ảnh đó?
 
-   Có, ảnh `train_08.jpg` có OKS với nhãn gold thấp nhất trong bài gán (0.8471) và cũng là ảnh model gặp nhiều khó khăn nhất trong việc dự đoán tư thế. Điều này chứng minh đây là một bức ảnh có độ phức tạp cao (nhiễu thị giác, góc chụp bất lợi hoặc độ che khuất lớn), gây khó khăn cho cả việc nhận thức thị giác của con người lẫn khả năng trích xuất đặc trưng của mạng nơ-ron.
+   **Không trùng nhau.** Ảnh tôi gán có OKS thấp nhất so với Gold là `train_08.jpg` (0.8471 - do tư thế nghiêng và góc khuất gây khó khăn cho việc ước lượng giải phẫu), trong khi model lại đoán tệ nhất ở `train_13` (0.495). Điều này cho thấy sự khác biệt rõ rệt giữa khó khăn của con người và model: Con người dễ phân vân ở các tư thế đơn lẻ nhưng bị che khuất mốc xương (`train_08`), còn model lại dễ bị bối rối và sụt giảm độ chính xác nghiêm trọng ở các bức ảnh đông người có sự đan xen chồng lấn thân thể (`train_13`).
 
 ## 5. Một rule evidence bạn đã dùng
 
